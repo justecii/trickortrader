@@ -1,0 +1,65 @@
+<h3>Here are your grocery lists</h3>
+
+    <% names.forEach(function(name) { %>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-xs-3 col-sm-1 col-md-1 col-lg-1">
+            <a href="/list" deleteUrl="/list/<%=name.id%>" class="btn btn-danger glyphicon glyphicon-trash delete-btn"></a>
+          </div>
+          <div class="col-xs-9 col-sm-8 col-md-8 col-lg-8">  
+            <p><a href="/list/<%=name.id%>"><%= name.listName %></a></p>
+          </div>
+        </div>
+      </div>
+    <% }); %>
+
+      
+      <form action="/list" method="POST">
+        <div class="form-group">
+          <label for="listName">Add New Grocery List</label>
+          <input type="text" class="form-control" id="list" name="listName"required>
+        </div>
+      
+        <input type="submit" class="btn btn-primary">
+      </form>
+      
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js">
+      </script>
+      <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+       integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+       crossorigin="anonymous"></script>
+      <script>
+        $('.delete-btn').on('click', function(e){
+         // e.preventDefault();
+         var deleteUrl =$(this).attr('deleteUrl');
+          $.ajax({
+            method: 'DELETE',
+            url: deleteUrl
+          });
+        });
+      </script>
+      
+      
+<style>
+  h3 {
+    color: darkblue;
+    font-family: serif;
+  }
+  label {
+    font-size: 20px;
+    font-family: sans-serif;
+    color: darkblue;
+    margin-top: 30px;
+  }
+  #list {
+      width: 70%;
+  }
+  p {
+    font-size: 30px;
+    font-family: sans-serif;
+  }
+  .navbar-brand {
+  margin-left: 10px;
+  font-weight: bold;
+  font-family: serif;
+</style>

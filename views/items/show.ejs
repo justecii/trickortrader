@@ -1,0 +1,73 @@
+    
+ <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <a href="/list/<%=listId%>/share" class="btn btn-info">Share this list with another user</a>
+      </div> 
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <h3>Grocery List for <%=listName%></h3>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <a href="/item/addItem/<%=listId%>" class="btn btn-success add">Add Item</a>
+      </div>
+    </div>
+ </div>     
+<% items.forEach(function(item) { %>
+  <div class="container-fluid">
+      <div class="row">
+        <div class="col-xs-2 col-sm-1 col-md-1 col-lg-1">
+          <a href="/list/<%=listId%>" deleteUrl="/item/<%=item.itemName%>" class="btn btn-danger glyphicon glyphicon-trash delete-btn"></a>
+        </div>
+        <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2">
+          <a href="/item/edit/<%= item.itemName %>" class="btn btn-info glyphicon glyphicon-edit"> Edit</a>
+        </div>  
+        <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2">
+          <h4><a href="/item/<%= item.itemName %>"><%= item.itemName %></a></h4>
+        </div> 
+        <div class="col-xs-2 col-sm-1 col-md-1 col-lg-1">   
+          <h4><span><%= item.amount %></span></h4>
+        </div> 
+      </div>  
+  </div>
+<% }); %>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js">
+</script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"
+ integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+ crossorigin="anonymous"></script>
+<script>
+  $('.delete-btn').on('click', function(e){
+   // e.preventDefault();
+   var deleteUrl =$(this).attr('deleteUrl');
+    $.ajax({
+      method: 'DELETE',
+      url: deleteUrl
+    });
+  });
+</script>
+
+<style>
+  body {
+  margin: 0;
+  padding: 0;
+  background: url(/img/background.jpg);
+  background-size:cover;
+  }
+  h3, h4 {
+  color: darkblue;
+  font-family: serif;
+  }
+  span {
+  margin-left: 10px;
+  }
+  .navbar-brand {
+  margin-left: 10px;
+  font-weight: bold;
+  font-family: serif;
+  }
+  .add {
+    margin-bottom: 20px;
+  }
+</style>
+

@@ -1,0 +1,63 @@
+<h3>Share your <a href="/list/<%=list.id%>"><%=list.listName%></a> list with another user </h3>
+
+<% users.forEach(function(user) { %>
+ <div class="container-fluid">
+  <div class="row">
+    <div class="col col-xs-4 col-sm-2 col-md-2 col-lg-2">
+        <h4><%= user.name %></h4> 
+    </div>    
+    <div class="col col-xs-6 col-sm-2 col-md-2 col-lg-2">    
+        <a type="button" href= "/list/<%=list.id%>/share"class="btn btn-primary" editUrl="/list/<%=list.id%>/user/<%=user.id%>">Share with this user</a>
+    </div>
+  </div>
+ </div>   
+<% }); %>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js">
+</script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"
+ integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+ crossorigin="anonymous"></script>
+<script>
+   
+    $('[type=button]').on('click', function(e) {
+        e.preventDefault();
+        var updateUrl = $(this).attr('editUrl');
+        
+        $.ajax({
+            method: 'PUT',
+            url: updateUrl,
+        }).done(function(data) {
+        // get data returned from the PUT route
+        console.log(data);
+        location.reload();
+        });
+    });
+</script>
+
+<style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: url(/img/background.jpg);
+            background-size:cover;
+        }
+        h3, h4 {
+            color: darkblue;
+            text-align: left;
+            font-family: serif;
+        }
+        span {
+            display: inline-block;
+            margin-left: 30px;
+        }
+        
+        .navbar-brand {
+            margin-left: 10px;
+            font-weight: bold;
+            font-family: serif;
+      }
+      .add {
+        margin-bottom: 20px;
+      }
+</style>
